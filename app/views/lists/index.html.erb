@@ -1,7 +1,36 @@
-<h1>Lists</h1>
+<header>
+  <div class="container">
+    <div class="card header-card">
+      <div class="card-body">
+        <h1>What to watch next</h1>
+        <h3>Lists of movies to stop the indecision</h3>
+      </div>
+    </div>
+  </div>
+</header>
 
-<ul>
-  <% @lists.each do |list| %>
-    <li><%= list.name %></li>
-  <% end %>
-</ul>
+<main>
+  <div class = "container">
+    <h3>My Lists</h3>
+
+    <div class="row">
+      <% @lists.each do |list| %>
+        <div class="col-sm-3">
+          <div class="card list-card">
+            <%= image_tag "yellow_movie.jpg", class: "card-img", alt: "Yellow film background" %>
+            <div class="card-img-overlay">
+              <div class="card-title">
+                <%= link_to list.name, list_path(list) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= link_to "Add a list", new_list_path, class:"btn btn-warning" %>
+    </div>
+
+  </div>
+</main>

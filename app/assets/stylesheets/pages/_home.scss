@@ -1,1 +1,43 @@
 // Specific CSS for your home-page
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.list-card {
+  border: none;
+  text-align: center;
+  font-size: large;
+}
+
+.header-card {
+  border: none;
+  text-align: center;
+}
+
+.movie-card {
+  text-align: center;
+  background-color: white;
+}
+
+header {
+  height: 40vh;
+  text-align: center;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
