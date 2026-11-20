@@ -1,34 +1,41 @@
-<header>
+<header class="page-header">
   <div class="container">
-    <div class="card header-card">
-      <div class="card-body">
-        <h1>What to watch next</h1>
-        <h3>Lists of movies to stop the indecision</h3>
-      </div>
+    <div class="card-category"
+      style="background-image: url('<%= asset_path "red_movie.avif" %>')">
+      <h1>What to watch next</h1>
+      <h3>Lists of movies<br>to stop the indecision</h3>
     </div>
   </div>
 </header>
 
-<main>
-  <div class = "container">
-    <h3>My Lists</h3>
+<main class="page-content">
+  <div class="container">
 
-    <div class="row">
+    <h2 class="my-4">My Lists</h2>
+
+    <div class="row g-4">
       <% @lists.each do |list| %>
-        <div class="col-sm-3">
-          <div class="card list-card">
-            <%= image_tag "yellow_movie.jpg", class: "card-img", alt: "Yellow film background" %>
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="card list-card <%= 'has-photo' if list.photo.attached? %>">
+
+            <% if list.photo.attached? %>
+              <%= cl_image_tag list.photo.key, class: "card-img", alt: "Uploaded list photo" %>
+            <% else %>
+              <%= image_tag "yellow_movie.jpg", class: "card-img", alt: "Yellow film background" %>
+            <% end %>
+
             <div class="card-img-overlay">
-              <div class="card-title">
+              <h3 class="card-title">
                 <%= link_to list.name, list_path(list) %>
-              </div>
+              </h3>
             </div>
           </div>
+
         </div>
       <% end %>
     </div>
 
-    <div>
+    <div class="mt-4">
       <%= link_to "Add a list", new_list_path, class:"btn btn-warning" %>
     </div>
 

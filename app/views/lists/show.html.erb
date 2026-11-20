@@ -1,41 +1,64 @@
-<div class="container">
-  <div class="card header-card">
-    <div class="card-body">
+<header class="page-header">
+  <div class="container">
+    <% background_url = @list.photo.attached? ? cl_image_path(@list.photo.key) : asset_path("red_movie.avif") %>
+
+    <div class="card-category"
+      style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= background_url %>')">
       <h1><%= @list.name %></h1>
     </div>
   </div>
-</div>
+</header>
 
-<main>
-  <div class = "container">
-    <div class="row">
-      <% @list.bookmarks.each do |bookmark| %>
-        <div class="col-sm-3">
-          <div class="card movie-card">
-            <%= image_tag "", class: "card-img", alt: "" %>
-            <div class="card-body">
-              <h5><strong><%= bookmark.movie.title %></strong></h5>
-              <p><%= bookmark.movie.overview %></p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><%= bookmark.movie.rating %><i class="fa-solid fa-star ms-2"></i></li>
-              <li class="list-group-item"><i class="fa-solid fa-quote-left me-2"></i><%= bookmark.comment %><i class="fa-solid fa-quote-right ms-2"></i></li>
-            </ul>
-            <div class="card-body">
-              <%= link_to "Delete", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-            </div>
+<main class="page-content">
+  <div class ="container">
+
+    <h2 class="my-4">Movies</h2>
+
+  <div class="row g-4">
+    <% @list.bookmarks.each do |bookmark| %>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card movie-card h-100">
+
+          <%= image_tag bookmark.movie.poster_url, class: "movie-img", alt: bookmark.movie.title %>
+
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= bookmark.movie.title %>
+            </h5>
+
+            <p class="card-text">
+              <%= bookmark.movie.overview %>
+            </p>
+          </div>
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <%= bookmark.movie.rating %>
+              <i class="fa-solid fa-star ms-2"></i>
+            </li>
+
+            <li class="list-group-item">
+              <i class="fa-solid fa-quote-left me-2"></i>
+              <%= bookmark.comment %>
+              <i class="fa-solid fa-quote-right ms-2"></i>
+            </li>
+          </ul>
+
+          <div class="card-body">
+            <%= link_to "Delete", bookmark_path(bookmark),
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},
+            class:"text-danger" %>
+          </div>
+
           </div>
         </div>
       <% end %>
     </div>
 
-    <div class="row row-cols-auto">
-      <div class="col">
-        <%= link_to "Bookmark a film", new_list_bookmark_path(@list), class:"btn btn-warning" %>
-      </div>
-      <div class="col">
-        <%= link_to "Back to lists", lists_path, class:"btn btn-outline-secondary" %>
-      </div>
+    <div class="d-flex flex-wrap gap-3 mt-4">
+      <%= link_to "Bookmark a film", new_list_bookmark_path(@list), class:"btn btn-warning" %>
+      <%= link_to "Back to lists", lists_path, class:"btn btn-outline-secondary" %>
     </div>
-  </div>
+
+    </div>
 </main>

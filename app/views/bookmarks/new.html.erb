@@ -1,22 +1,19 @@
-<div class="container">
-  <div class="card header-card">
-    <div class="card-body">
-      <h1>Add a new bookmark</h1>
-    </div>
-  </div>
-</div>
-
-
-<main>
+<main class="page-content">
   <div class="container">
-    <%= simple_form_for [@list, @bookmark] do |f| %>
-      <%= f.input :comment %>
-      <%= f.association :movie %>
 
-      <div class="d-flex gap-2">
-        <%= f.button :submit, class:"btn btn-warning" %>
-        <%= link_to "Back to list", list_path(@list), class:"btn btn-outline-secondary" %>
-      </div>
-    <% end %>
+    <div class="form-container">
+      <h1 class="mb-4">Add a new bookmark</h1>
+
+      <%= simple_form_for [@list, @bookmark] do |f| %>
+        <%= f.input :comment %>
+        <%= f.association :movie %>
+
+        <div class="d-flex gap-2 mt-4">
+          <%= f.button :submit, class: "btn btn-warning" %>
+          <%= link_to "Back to list", list_path(@list), class: "btn btn-outline-secondary" %>
+        </div>
+      <% end %>
+    </div>
+
   </div>
 </main>
